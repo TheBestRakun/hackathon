@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Waste Textiles - Atık Tekstil Geri Dönüşümü</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Başlangıcı */
+
+        /* Genel Sıfırlama ve Font */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5; 
+            color: #34495e; 
+            min-height: 100vh;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigasyon Çubuğu */
+        nav {
+            background-color: #34495e; 
+            color: white;
+            padding: 15px 10px; 
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-image: url('nav-leaves.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        nav::before { 
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        nav > ul { 
+            position: relative;
+            z-index: 2;
+        }
+
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-size: 0.9em; 
+        }
+
+        nav ul li {
+            margin: 0 8px; 
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 5px 0;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap; 
+        }
+
+        nav ul li a:hover {
+            color: #a3e4d7;
+            border-bottom: 2px solid #a3e4d7;
+        }
+
+        /* Başlık Alanı */
+        header {
+            background-color: #fdfdfd;
+            padding: 60px 20px;
+            border-bottom: 4px solid #27ae60;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+            background-image: url('header-leaves.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        header > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin: 0;
+            color: white;
+            font-weight: 700;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 1.4em;
+            padding: 15px 20px;
+            margin-top: 15px;
+            color: #ecf0f1;
+        }
+        
+        /* Detay Bölümleri (Ortak Stil) */
+        .details-section-container {
+            padding: 40px 80px;
+            background-color: #ffffff;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .details-section h3 {
+            color: #2c3e50;
+            font-size: 2em;
+            font-weight: 600;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #27ae60;
+            padding-bottom: 8px;
+        }
+        
+        .details-section p {
+            font-size: 1.15em;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        /* ---------------------------------------------------- */
+        /* TRAGEDİ BÖLÜMÜ STİLLERİ (Görselsiz) */
+        /* ---------------------------------------------------- */
+        #trajediler {
+            background-color: #ffe0b2; 
+            padding: 60px 80px;
+        }
+        #trajediler h2 {
+            text-align: center;
+            color: #e67e22; 
+            font-size: 2.5em;
+            border-bottom: 4px solid #e67e22;
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+        }
+        .tragedy-content {
+            display: flex; 
+            gap: 40px;
+            align-items: flex-start; 
+        }
+        .tragedy-text {
+            width: 100%; 
+            padding-top: 0; 
+        }
+        
+        /* ---------------------------------------------------- */
+        /* YENİ SU AYAK İZİ BÖLÜMÜ STİLİ */
+        /* ---------------------------------------------------- */
+        #water-footprint {
+            padding: 50px 80px;
+            background-color: #d1e7dd; /* Açık yeşil tonu */
+            border-top: 5px solid #27ae60;
+        }
+        #water-footprint h3 {
+            color: #0b5345; 
+            font-size: 2.2em;
+            border-bottom: 3px solid #0b5345;
+            padding-bottom: 8px;
+            margin-bottom: 30px;
+        }
+        #water-footprint p {
+            color: #333;
+            font-size: 1.1em;
+        }
+        #water-footprint ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #333;
+        }
+        #water-footprint li {
+            margin-bottom: 10px;
+        }
+        /* ---------------------------------------------------- */
+
+
+        /* Geri Dönüşüm Hesaplayıcısı Stilleri */
+        .calculator-section {
+            background-color: #f7f9fb;
+            padding: 50px 80px;
+            text-align: center;
+        }
+        .calculator-form {
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .input-group {
+            margin-bottom: 25px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 5px;
+        }
+        .input-group input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .calculate-button {
+            background-color: #3498db; 
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        .calculate-button:hover {
+            background-color: #2980b9;
+        }
+        .result-box {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #27ae60;
+            border-radius: 8px;
+            background-color: #e8f5e9; 
+            font-weight: 600;
+            color: #27ae60;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        /* Hikayeler ve İstatistikler Stili */
+        .story-section {
+            background-color: #34495e; 
+            color: white;
+            padding: 60px 80px;
+            text-align: center;
+        }
+        .story-section h3 {
+            color: #a3e4d7;
+            border-bottom: 3px solid #a3e4d7;
+        }
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .stat-item {
+            flex-basis: 30%;
+            min-width: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .stat-item .number {
+            font-size: 3em;
+            font-weight: 700;
+            color: #27ae60;
+            line-height: 1;
+        }
+        .stat-item .label {
+            font-size: 1.1em;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        /* Malzeme Kılavuzu Stili */
+        .guide-section {
+            padding: 50px 80px;
+            background-color: #f7f9fb;
+        }
+        .guide-section h3 {
+            border-bottom: 3px solid #e67e22; 
+        }
+        .material-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+        .material-item {
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid #e67e22;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .material-item strong {
+            display: block;
+            font-size: 1.3em;
+            color: #e67e22;
+            margin-bottom: 5px;
+        }
+
+        /* Soru-Cevap (FAQ) Stili */
+        .faq-section {
+            padding: 50px 80px;
+            background-color: #ffffff;
+        }
+        .faq-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .faq-question {
+            font-weight: 600;
+            color: #34495e;
+            cursor: pointer;
+            font-size: 1.2em;
+            position: relative;
+        }
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            font-size: 1.5em;
+            line-height: 0.8;
+            transition: transform 0.3s;
+        }
+        .faq-answer {
+            margin-top: 10px;
+            color: #7f8c8d;
+            font-size: 1em;
+            display: none; 
+            padding-left: 15px;
+            border-left: 3px solid #27ae60;
+            margin-top: 5px;
+        }
+
+        /* Fikirler Bölümü CSS'i */
+        .feedback-section {
+            background-color: #e9ecef;
+            padding: 50px 80px;
+            text-align: center;
+            border-top: 2px solid #34495e;
+        }
+
+        /* Form Stilleri (Fikirler Formu) */
+        .feedback-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .feedback-form button {
+            background-color: #27ae60;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .feedback-form button:hover {
+            background-color: #2ecc71;
+        }
+
+        /* Ana İçerik Bölümü (Flexbox) */
+        .main-content-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 50px 50px;
+            background-color: #e9ecef;
+        }
+
+        .section {
+            flex: 1 1 300px; 
+            max-width: 350px;
+            padding: 30px;
+            color: white;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+            background-size: cover;
+            background-position: center;
+            min-height: 450px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+            position: relative;
+        }
+        
+        /* RESPONSIVE TASARIM (Mobil Uyumluluk) */
+        @media (max-width: 992px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            .details-section-container, .feedback-section, .calculator-section, .story-section, .guide-section, .faq-section, #trajediler, #water-footprint {
+                padding: 30px 20px;
+            }
+            .tragedy-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .tragedy-content img, .tragedy-text {
+                width: 100%;
+                max-width: none;
+            }
+            /* Başlık ve Metin boyutları mobil için ayarlandı */
+            h1 { font-size: 2em; }
+            .intro-text { font-size: 1.1em; }
+            .details-section h3 { font-size: 1.6em; }
+            .details-section p { font-size: 1em; }
+        }
+        
+        /* Font Awesome İkonları */
+        .fa {
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+        .fa-phone:before { content: "\f095"; }
+        .fa-envelope:before { content: "\f0e0"; }
+        .fa-map-marker-alt:before { content: "\f3c5"; }
+        /* CSS Bitişi */
+    </style>
+</head>
+<body>
+
+    <a id="top"></a> 
+    <div class="sticker recycle-top-left"></div>
+    <div class="sticker earth-bottom-right"></div>
+    
+    <header>
+        <h1>SAVE WASTE TEXTILES</h1>
+        <p class="intro-text">Geleceğin Modasını Geri Dönüşümle Şekillendiriyoruz.</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#top">Ana Sayfa</a></li>
+            <li><a href="#section1">Nedir?</a></li>
+            <li><a href="#section6">Döngüsel Ekonomi</a></li>
+            <li><a href="#trajediler">Küresel Trajediler</a></li> 
+            <li><a href="#water-footprint">Su Ayak İzi</a></li> <li><a href="#hesaplayici">Ayak İzi Hesaplama</a></li>
+            <li><a href="#malzeme_rehberi">Malzeme Kılavuzu</a></li>
+            <li><a href="#hikayeler">Hikayeler / İstatistikler</a></li>
+            <li><a href="#sikca_sorulanlar">S.S.S.</a></li>
+            <li><a href="#fikirler">Fikir ve Çözümler</a></li>
+            <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+    </nav>
+    
+    <div class="details-section-container">
+        <div id="section1" class="details-section">
+            <h3>1. Atık Tekstil Nedir, Nasıl Oluşur?</h3>
+            <p>
+                **Atık tekstil**, üretim, tüketim veya kullanım sonrası süreçlerde ortaya çıkan, artık orijinal amacına hizmet etmeyen kumaş, iplik, giysi ve ev tekstili ürünlerinin tamamıdır. Bu atıklar kabaca ikiye ayrılır: Üretim sırasında ortaya çıkan **tüketim öncesi atıklar** (kesim artıkları, hatalı numuneler) ve özellikle **Hızlı Moda** akımının tetiklediği, kullanılıp atılan **tüketim sonrası atıklar** (yıpranmış giysiler, modası geçmiş kıyafetler). Modanın döngüsünün hızlanması, bu atık miktarını küresel çapta kritik seviyelere ulaştırmıştır.
+            </p>
+        </div>
+
+        <div id="section2" class="details-section">
+            <h3>2. Nasıl Mücadele Edebiliriz?</h3>
+            <p>
+                Atık tekstil sorununa karşı mücadele, sadece son aşama olan geri dönüşümden ibaret değildir; dört ana stratejiyi içerir: **Azaltma** (daha az ve kaliteli ürün satın alma), **Yeniden Kullanma** (giysileri ikinci el piyasasına sunma veya onarma), **Onarım** (yırtık veya hasarlı giysileri tamir etme) ve en son aşamada **Geri Dönüşüm**. Tüketici olarak bilinçli tercihler yapmak, döngüsel moda markalarını desteklemek ve atıklarımızı doğru toplama kanallarına ulaştırmak bu mücadelenin temelini oluşturur.
+            </p>
+        </div>
+
+        <div id="section3" class="details-section">
+            <h3>3. Dünya'da Atık Tekstil Sorununun Örnekleri</h3>
+            <p>
+                Küresel tekstil atığı sorununun en somut örnekleri, gelişmekte olan ülkelerdeki büyük atık yığınlarında görülmektedir. Örneğin, **Şili'deki Atacama Çölü**, Batı ülkelerinden gelen kullanılmış giysi ve tekstil atıklarının devasa bir çöplüğüne dönüşmüştür. Benzer şekilde, Gana ve bazı Afrika ülkeleri de 'hızlı moda'nın atık yükünü taşımaktadır. Bu bölgelerdeki atıklar, yerel ekosistemi ve su kaynaklarını zehirlerken, küresel ticaret dengesizliğini de gözler önüne sermektedir. Geri dönüşüm adı altında ihraç edilen giysilerin büyük bir kısmı satılamaz durumda olduğu için doğrudan çöp sahalarına gitmektedir.
+            </p>
+        </div>
+
+        <div id="section4" class="details-section">
+            <h3>4. Bunlara Bulunan Çözüm Yöntemleri</h3>
+            <p>
+                Teknoloji ve inovasyon, tekstil atıklarına çözüm sunar. **Mekanik geri dönüşümde**, kumaşlar parçalanır ve yeni ipliklere dönüştürülür, ancak bu işlem lif kalitesini düşürebilir. Bu nedenle, son yıllarda **kimyasal geri dönüşüm** ön plana çıkmıştır. Kimyasal yöntem, atık kumaşları moleküler bileşenlerine ayırarak, Polyester veya Selüloz gibi saf hammaddeler elde etmeyi ve yeni kumaşları orijinal kalitesinde üretmeyi hedefler. Akıllı ayıklama teknolojileri (yapay zeka destekli) de lif türüne göre ayrıştırma yaparak bu iki sürecin verimliliğini artırmaktadır.
+            </p>
+        </div>
+        
+        <div id="section5" class="details-section">
+            <h3>5. Atık Tekstil'in Tarihçesi ve Küresel Yenilikler</h3>
+            <p>
+                Atık tekstil sorunu, **20. yüzyılın sonlarında** kitlesel üretim ve özellikle 2000'li yıllardan sonra hızlanan **hızlı moda** kültürü ile hızlanmıştır. Buna cevaben küresel kurumlar kritik adımlar atmıştır:
+                <br>
+                **Birleşmiş Milletler (BM):** Sektörü, **Sürdürülebilir Kalkınma Amaçları (SDG 12)** çerçevesinde sorumlu üretim ve tüketime yönlendirmekte, tekstil atığı kaynaklı kirliliğin azaltılmasına yönelik uluslararası işbirliklerini teşvik etmektedir.
+                <br>
+                **Avrupa Birliği (AB):** En önemli yenilik, **Genişletilmiş Üretici Sorumluluğu (GÜS)** ilkesini tekstil için zorunlu hale getirmeyi planlamasıdır. Bu kural, markaların ürünlerinin kullanım ömrü sonundaki toplanması ve geri dönüştürülmesi maliyetlerinden sorumlu olmasını sağlayacaktır. Ayrıca, AB, **2025 yılına kadar** tüm üye ülkelerde tekstil atıklarının zorunlu olarak ayrı toplanmasını kararlaştırmıştır.
+            </p>
+        </div>
+        
+        <div id="section6" class="details-section">
+            <h3>6. Döngüsel ve Küresel Ekonomi Alanındaki Etkileri</h3>
+            <p>
+                Atık tekstilin geri dönüştürülmesi, doğrusal (al-kullan-at) ekonomik modelin terk edilerek **döngüsel ekonomiye** geçişte kritik bir rol oynar. Küresel düzeyde tekstil atıklarının yarattığı ekonomik kayıp 250 milyar doları bulmaktadır. Geri dönüşüm ise bu kaybı fırsata dönüştürür:
+                <br>
+                <ul>
+                    <li>**Hammadde Bağımlılığının Azalması:** Geri dönüştürülmüş elyaf kullanımı, bakir (virjin) pamuk veya petrolden elde edilen polyester gibi birincil hammadde ihtiyacını ve buna bağlı ithalat yükünü azaltır. Örneğin Türkiye’de tekstil geri kazanımı sayesinde ithalat yükünde $413 milyonluk bir tasarruf sağlanmıştır.</li>
+                    <li>**Enerji ve Su Tasarrufu:** Geri dönüştürülmüş malzemeden üretim yapmak, yeni üretim süreçlerine göre önemli ölçüde daha az enerji ve su tüketir (bazı kaynaklarda %50'ye varan enerji tasarrufu).</li>
+                    <li>**Yeni İstihdam ve Ekonomik Değer:** Döngüsel iş modelleri, ayrıştırma, işleme, onarım ve yeniden kullanım gibi alanlarda yeni ve yüksek nitelikli **iş fırsatları** yaratır. Hesaplamalar, toplanan her 1000 ton tekstil ürünü için 20 ila 35 yeni iş fırsatının doğabileceğini göstermektedir.</li>
+                    <li>**Marka Değeri ve Rekabetçilik:** Küresel markalar, ürünlerinde geri dönüştürülmüş materyalleri kullanarak sadece prestij kazanmakla kalmaz, aynı zamanda AB gibi büyük pazarların zorunlu kılacağı eko-tasarım kurallarına ve düzenlemelerine uyum sağlayarak **küresel rekabetçiliklerini** artırır.</li>
+                    </ul>
+                Bu dönüşüm, yalnızca çevresel bir gereklilik değil, aynı zamanda **340-630 milyar dolar** aralığında net materyal maliyetinde azalma potansiyeli sunan küresel bir ekonomik fırsattır.
+            </p>
+        </div>
+        </div>
+
+    ---
+
+    <div id="trajediler">
+        <h2>Hızlı Modanın Görünmez Çöp Dağları: Küresel Tekstil Trajedileri</h2>
+        
+        <div class="tragedy-content">
+            
+            <div class="tragedy-text">
+                <h3>Gana: Batı'nın Tekstil Yükünü Taşıyan Akouos Tepesi</h3>
+                <p>
+                    Gana'nın başkenti Accra'daki **Kantamanto Pazarı**, Batı ülkelerinden (özellikle Avrupa ve Amerika'dan) gelen ikinci el kıyafetlerin Batı Afrika'daki en büyük dağıtım merkezidir. Ancak durum, sanıldığı gibi bir bağış hikayesi değildir. **"Obroni Wawu"** (Ölü Beyaz Adamın Kıyafeti) olarak adlandırılan bu giysi balyalarının tahmini **%40'ı** satılamaz durumdadır, ya kalitesizdir ya da hasarlıdır.
+                </p>
+                <p>
+                    Bu kullanılamaz kıyafetler, ülkenin çöp sahalarına yığılarak **"Akouos Tepesi"** olarak bilinen devasa tekstil dağlarını oluşturur. Bu atıklar, sentetik içerikleri nedeniyle yandıklarında toksik duman yayar, toprağa ve yer altı sularına karışarak **Körük Çayı (Korle Lagoon)** ve çevresindeki ekosistemi zehirler. Hızlı moda döngüsünün yarattığı bu yük, yoksul bir ülkenin yerel ekonomisini ve halk sağlığını tehdit eden dev bir çevre trajedisine dönüşmektedir.
+                </p>
+            </div>
+        </div>
+    </div>
+    ---
+
+    <div id="water-footprint">
+        <h3>Gizli Maliyet: Tekstil Üretiminin Su ve Kimyasal Ayak İzi</h3>
+        <p>
+            Tekstil endüstrisinin çevresel etkisi, sadece atık dağlarından ibaret değildir. Giysiler daha mağazaya gelmeden önce, üretimin ilk aşamalarında büyük bir **su krizi** ve **kimyasal kirlilik** yaratır.
+        </p>
+        <ul>
+            <li>
+                **Sanal Su Tüketimi (Pamuk):** Tek bir **pamuklu tişörtün** üretimi için ortalama **2.700 litre** su gerekir. Bu miktar, bir kişinin 2,5 yıldan fazla içme suyu ihtiyacına eşittir. **Kot pantolon** üretimi ise 7.000 ila 10.000 litre suyu tüketebilir.
+            </li>
+            <li>
+                **Kimyasal Zehirlenme:** Tekstil boyama ve terbiye işlemleri sırasında kullanılan yaklaşık **8.000 farklı sentetik kimyasal** bulunmaktadır. Bu kimyasalların büyük bir kısmı, uygun arıtma yapılmadan nehirlere ve su yollarına deşarj edilir. Bu durum, özellikle Asya'daki büyük üretim merkezlerinde yerel halkın sağlığını ve tarım arazilerini doğrudan tehdit etmektedir.
+            </li>
+            <li>
+                **Pestisit Kullanımı:** Konvansiyonel pamuk tarımı, küresel pestisit ve insektisit kullanımının büyük bir bölümünden sorumludur. Bu kimyasallar sadece zararlı böcekleri değil, aynı zamanda biyoçeşitliliği yok ederek toprak sağlığını bozar ve yeraltı sularına sızar.
+            </li>
+        </ul>
+        <p>
+            Geri dönüşüm, bu döngünün sonunu yönetirken, **su ayak izini azaltmak** için **Organik Pamuk** veya **kapalı döngü selülozik elyaflar** (Tencel/Lyocell gibi) gibi daha sürdürülebilir hammaddelerin tercih edilmesi kritik öneme sahiptir.
+        </p>
+    </div>
+    ---
+
+    <div id="hesaplayici" class="calculator-section">
+        <h2>Kişisel Çevre Ayak İzinizi Hesaplayın</h2>
+        <p>Attığınız her parça giysi, değerli bir kaynağın kaybı demektir. Kaybınızı ve potansiyel tasarrufu görün!</p>
+        
+        <div class="calculator-form">
+            <h3>Yıllık Tüketiminiz</h3>
+            <div class="input-group">
+                <label for="tshirt">Yılda ortalama kaç adet T-shirt atıyorsunuz/eskitip yeniliyorsunuz?</label>
+                <input type="number" id="tshirt" min="0" value="0">
+            </div>
+            <div class="input-group">
+                <label for="jeans">Yılda ortalama kaç adet Kot Pantolon atıyorsunuz/eskitip yeniliyorsunuz?</label>
+                <input type="number" id="jeans" min="0" value="0">
+            </div>
+            <button type="button" class="calculate-button" onclick="calculateImpact()">Etkiyi Hesapla</button>
+            
+            <div id="impactResult" class="result-box" style="display:none;">
+                </div>
+        </div>
+    </div>
+
+    <div id="malzeme_rehberi" class="guide-section">
+        <div class="details-section">
+            <h3>Tekstil Malzeme Kılavuzu: Geri Dönüşümde Ne Neyi Değiştirir?</h3>
+            <p>Kumaşın türü, geri dönüştürülebilme kolaylığını, dolayısıyla çevresel etkisini doğrudan belirler. İşte en yaygın kumaşlar ve geri dönüşüm durumları:</p>
+            <ul class="material-list">
+                <li class="material-item">
+                    <strong>Pamuk (Cotton)</strong>
+                    <p>Tek başına geri dönüşümü en kolay ve en verimli olanıdır (mekanik). Ancak tarımı su yoğundur. Organik Pamuk, çevresel etkiyi azaltır.</p>
+                </li>
+                <li class="material-item">
+                    <strong>Polyester (PET)</strong>
+                    <p>Kimyasal yöntemlerle saf hammaddeye (RPET) dönüştürülebilir. Enerji tüketimi yüksektir, ancak geri dönüşümü bakir üretime göre daha az petrol kullanır.</p>
+                </li>
+                <li class="material-item">
+                    <strong>Karışık Elyaf (Pamuk/Polyester Karışımı)</strong>
+                    <p>Geri dönüşümü en zor olanlardır. Ayrıştırma, pahalı ve karmaşık kimyasal işlemler gerektirir. Tüketici olarak kaçınılması gereken ürünlerdir.</p>
+                </li>
+                <li class="material-item">
+                    <strong>Elastan/Likra (Spandex)</strong>
+                    <p>Geri dönüşüm sürecinde diğer lifleri bozar ve saf elyaf elde etmeyi imkansızlaştırır. Mümkünse en az elastan içeren ürünleri tercih edin.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="hikayeler" class="story-section">
+        <div class="details-section">
+            <h3>Etki Rakamlarımız ve Dönüşüm Hikayeleri</h3>
+            <p>Sadece konuşmuyoruz, dönüştürüyoruz. İşte Save Waste Textiles'ın katkıları:</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="number">12.500+</div>
+                    <div class="label">TON Geri Dönüştürülmüş Tekstil</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">28 Milyon</div>
+                    <div class="label">LİTRE Su Tasarrufu (Tahmini)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">75.000+</div>
+                    <div class="label">CO2 Salınımından Kaçınma (kg)</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 50px; color: white; border-bottom: 3px solid white;">Bir Atığın Yeniden Doğuşu: Kot Pantolondan İzolasyona</h3>
+            <p style="color: #ccc; font-size: 1em;">Fabrikamızda işlenen binlerce kullanılmış kot pantolon, sadece yeni giysilere değil; otomotiv, inşaat ve yalıtım sektörlerinde kullanılan dayanıklı ses ve ısı izolasyon malzemelerine dönüştürülmektedir. Böylece, bir zamanlar çöp olacak malzemeler, yaşam alanlarımızı daha konforlu ve enerji verimli kılmaktadır.</p>
+        </div>
+    </div>
+    
+    <div id="sikca_sorulanlar" class="faq-section">
+        <div class="details-section">
+            <h3>Sıkça Sorulan Sorular (S.S.S.)</h3>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Geri dönüşüm için kirli veya yırtık kıyafetler verebilir miyim?</div>
+                    <div class="faq-answer">Evet, yırtık olması sorun değildir. Ancak hijyen açısından çok kirli, küflü veya kimyasalla temas etmiş ürünleri vermemeniz, çalışanlarımızın güvenliği ve diğer ürünlerin temizliği açısından önemlidir.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Geri dönüştürülmüş kumaşlar (recycled fabric) kaliteli midir?</div>
+                    <div class="faq-answer">Mekanik geri dönüşümde lif kalitesi bir miktar düşse de, kimyasal geri dönüşüm yöntemleri (özellikle polyesterde) sıfır ürüne yakın kalitede iplikler üretilmesini sağlamaktadır. Teknoloji her geçen gün kalitenin artmasını sağlamaktadır.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Hızlı moda ürünlerini satın almamak, bu sorunu çözer mi?</div>
+                    <div class="faq-answer">Hızlı moda ürünlerini azaltmak, talebi düşürerek sorunun kaynağını hafifletir. Ancak mevcut atık stoklarının geri dönüştürülmesi ve döngüsel ekonomiye geçiş, çözümün tamamlayıcı ve kritik bir parçasıdır.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="fikirler" class="feedback-section">
+        <h2>Fikir ve Çözüm Önerilerinizi Paylaşın</h2>
+        <p>Atık tekstil sorununa yönelik, yaratıcı ve uygulanabilir olduğunu düşündüğünüz çözüm önerilerini, yenilikçi fikirleri veya iyileştirme tavsiyelerinizi bize iletin. Sürdürülebilir geleceği birlikte inşa edelim!</p>
+        
+        <form class="feedback-form" action="#" method="POST"> 
+            <label for="name">Adınız Soyadınız (İsteğe Bağlı):</label>
+            <input type="text" id="name" name="name" placeholder="Adınız">
+
+            <label for="email">E-posta Adresiniz (Geri Dönüş İçin):</label>
+            <input type="email" id="email" name="email" placeholder="E-posta adresiniz">
+
+            <label for="suggestion">Fikir ve Çözüm Öneriniz:</label>
+            <textarea id="suggestion" name="suggestion" placeholder="Önerinizi buraya yazabilirsiniz..." required></textarea>
+
+            <button type="submit">Fikrimi Gönder</button>
+        </form>
+    </div>
+
+    <div class="main-content-flex">
+
+        <div id="misyonumuz" class="section">
+            <h2>Misyonumuz</h2>
+            <p>
+                Misyonumuz, atık tekstil geri dönüşümü alanında öncü olmak ve sektör standartlarını 
+                yükseltmektir. Kaynakları verimli kullanarak, sürdürülebilir ürünler üretmek ve bu 
+                süreçte çevresel ayak izimizi sürekli azaltmaktır. Gelecek nesillere daha temiz bir 
+                dünya bırakma gayesiyle çalışıyoruz.
+            </p>
+        </div>
+
+        <div id="iletisim" class="section">
+            <h2>Bize Ulaşın</h2>
+            <ul class="contact-list">
+                <li><i class="fa fa-map-marker-alt"></i> Organize Sanayi Bölgesi, Cad. No: 42, Kayseri/TÜRKİYE</li>
+                <li><i class="fa fa-phone"></i> +90 (352) 123 45 67</li>
+                <li><i class="fa fa-envelope"></i> info@savewaste.com.tr</li>
+            </ul>
+            <p>
+                Proje teklifleriniz, işbirlikleriniz ve sorularınız için bizimle iletişime geçmekten çekinmeyin.
+            </p>
+        </div>
+        
+        <div id="hakkimizda" class="section">
+            <h2>Hakkımızda</h2>
+            <p>
+                Save Waste Textiles olarak, çevreye olan sorumluluğumuzun bilinciyle hareket ediyoruz. 
+                Amacımız, atık tekstilleri döngüsel ekonomiye kazandırarak gezegenimiz üzerindeki olumsuz 
+                etkilerini en aza indirmektir. Yıllardır süregelen tecrübemizle, her bir atık parçasına 
+                yeni bir hayat verme vizyonunu benimsiyoruz.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        function calculateImpact() {
+            const tshirt = parseInt(document.getElementById('tshirt').value) || 0;
+            const jeans = parseInt(document.getElementById('jeans').value) || 0;
+            const resultBox = document.getElementById('impactResult');
+
+            // Basit tahmini çarpma değerleri
+            const waterPerTshirt = 2700; // litre (güncel bilgi ile revize edildi)
+            const waterPerJeans = 7000;  // litre
+            const co2PerTshirt = 3.5;    // kg
+            const co2PerJeans = 20;     // kg
+
+            const totalWater = (tshirt * waterPerTshirt) + (jeans * waterPerJeans);
+            const totalCo2 = (tshirt * co2PerTshirt) + (jeans * co2PerJeans);
+
+            if (tshirt === 0 && jeans === 0) {
+                 resultBox.innerHTML = 'Lütfen tüketim miktarlarınızı girin.';
+            } else {
+                 resultBox.innerHTML = `
+                    <p style="font-size:1.3em; color: #34495e;">Eğer bu ürünleri geri dönüştürseydiniz:</p>
+                    <p>Yaklaşık <strong>${totalWater.toLocaleString('tr-TR')} litre</strong> su ve <strong>${totalCo2.toLocaleString('tr-TR')} kg</strong> CO2 salınımından tasarruf edebilirdik! </p>
+                    <p style="font-size:0.9em; font-weight:400; color: #7f8c8d;">*Bu hesaplamalar tahmini değerlerdir.</p>
+                `;
+            }
+            resultBox.style.display = 'block';
+        }
+
+        // Sıkça Sorulan Sorular (FAQ) için açma/kapama işlevi
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const questions = document.querySelectorAll('.faq-question');
+            questions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const isVisible = answer.style.display === 'block';
+
+                    // Tüm cevapları kapat
+                    document.querySelectorAll('.faq-answer').forEach(ans => ans.style.display = 'none');
+
+                    // Tıklananı aç/kapat
+                    if (!isVisible) {
+                        answer.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
